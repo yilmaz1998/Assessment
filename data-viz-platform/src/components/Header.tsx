@@ -1,9 +1,22 @@
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useState } from 'react';
+import { useVariableStore } from '../variableStore';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const {
+    showGdp,
+    showInflation,
+    startYear,
+    endYear,
+    setShowGdp,
+    setShowInflation,
+    setStartYear,
+    setEndYear,
+  } = useVariableStore();
+
 
   const handleLogout = async () => {
     try {
@@ -16,6 +29,16 @@ const Header = () => {
   const toggleSideBar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   }
+
+  const handleStartYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Number(e.target.value);
+    if (val <= endYear) setStartYear(val);
+  };
+
+  const handleEndYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Number(e.target.value);
+    if (val >= startYear) setEndYear(val);
+  };
 
   return (
     <header className="bg-gray-100 px-3 py-3 flex justify-between items-center">
@@ -39,8 +62,56 @@ const Header = () => {
             ✕
           </button>
         </div>
-        <div className="p-4">
-          <p>This is your variable editing panel.</p>
+        <div className="p-4 space-y-6">
+        <div>
+            <h3 className="mb-2 font-semibold">Year Range</h3>
+            <div className="flex items-center gap-3">
+              <label>
+                Start:
+                <input
+                  type="number"
+                  value={startYear}
+                  min={2015}
+                  max={endYear}
+                  onChange={handleStartYearChange}
+                  className="ml-2 rounded px-2 text-white w-20"
+                />
+              </label>
+              <label>
+                End:
+                <input
+                  type="number"
+                  value={endYear}
+                  min={startYear}
+                  max={2025}
+                  onChange={handleEndYearChange}
+                  className="ml-2 rounded px-2 text-white w-20"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showGdp}
+                onChange={(e) => setShowGdp(e.target.checked)}
+              />
+              GDP Growth (%)
+            </label>
+          </div>
+
+          <div>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={showInflation}
+                onChange={(e) => setShowInflation(e.target.checked)}
+              />
+              Inflation (%)
+            </label>
+          </div>
         </div>
       </div>
     </header>
