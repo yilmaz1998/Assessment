@@ -2,6 +2,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useState } from 'react';
 import { useVariableStore } from '../variableStore';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,10 +11,14 @@ const Header = () => {
   const {
     showGdp,
     showInflation,
+    showInterestRate,
+    showUnemployment,
     startYear,
     endYear,
     setShowGdp,
     setShowInflation,
+    setShowInterestRate,
+    setShowUnemployment,
     setStartYear,
     setEndYear,
   } = useVariableStore();
@@ -57,28 +63,28 @@ const Header = () => {
           ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-lg font-semibold">Variables</h2>
+          <h2 className="text-lg font-semibold">Edit Variables</h2>
           <button onClick={toggleSideBar} className="text-gray-300 hover:text-white">
             ✕
           </button>
         </div>
         <div className="p-4 space-y-6">
-        <div>
-            <h3 className="mb-2 font-semibold">Year Range</h3>
+          <div>
+            <h3 className="mb-4 font-semibold">Year Range</h3>
             <div className="flex items-center gap-3">
               <label>
-                Start:
+                Start Year:
                 <input
                   type="number"
                   value={startYear}
                   min={2015}
                   max={endYear}
                   onChange={handleStartYearChange}
-                  className="ml-2 rounded px-2 text-white w-20"
+                  className="rounded px-2 text-white w-20"
                 />
               </label>
               <label>
-                End:
+                End Year:
                 <input
                   type="number"
                   value={endYear}
@@ -90,27 +96,57 @@ const Header = () => {
               </label>
             </div>
           </div>
-
           <div>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showGdp}
-                onChange={(e) => setShowGdp(e.target.checked)}
-              />
-              GDP Growth (%)
-            </label>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showGdp}
+                  onChange={(e) => setShowGdp(e.target.checked)}
+                  sx={{ color: 'white', '&.Mui-checked': { color: 'white' } }}
+                />
+              }
+              label="GDP Growth (%)"
+            />
           </div>
 
           <div>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showInflation}
-                onChange={(e) => setShowInflation(e.target.checked)}
-              />
-              Inflation (%)
-            </label>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showInflation}
+                  onChange={(e) => setShowInflation(e.target.checked)}
+                  sx={{ color: 'white', '&.Mui-checked': { color: 'white' } }}
+                />
+              }
+              label="Inflation (%)"
+            />
+          </div>
+
+
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showUnemployment}
+                  onChange={(e) => setShowUnemployment(e.target.checked)}
+                  sx={{ color: 'white', '&.Mui-checked': { color: 'white' } }}
+                />
+              }
+              label="Unemployment Rate (%)"
+            />
+          </div>
+
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showInterestRate}
+                  onChange={(e) => setShowInterestRate(e.target.checked)}
+                  sx={{ color: 'white', '&.Mui-checked': { color: 'white' } }}
+                />
+              }
+              label="Interest Rate (%)"
+            />
           </div>
         </div>
       </div>

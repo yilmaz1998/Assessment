@@ -3,8 +3,12 @@ import { create } from 'zustand';
 type VariableStore = {
     showGdp: boolean;
     showInflation: boolean;
+    showUnemployment: boolean;
+    showInterestRate: boolean;
     setShowGdp: (val: boolean) => void;
     setShowInflation: (val: boolean) => void;
+    setShowUnemployment: (val: boolean) => void;
+    setShowInterestRate: (val: boolean) => void;
     startYear: number;
     endYear: number;
     setStartYear: (val: number) => void;
@@ -15,8 +19,12 @@ type VariableStore = {
   export const useVariableStore = create<VariableStore>((set) => ({
     showGdp: true,
     showInflation: true,
+    showUnemployment: true,
+    showInterestRate: true,
     setShowGdp: (val) => set({ showGdp: val }),
     setShowInflation: (val) => set({ showInflation: val }),
+    setShowUnemployment: (val) => set({ showUnemployment: val }),
+    setShowInterestRate: (val) => set({ showInterestRate: val }),
     startYear: 2015,
     endYear: 2025,
     setStartYear: (val) => set((state) => ({ startYear: val > state.endYear ? state.endYear : val })),
