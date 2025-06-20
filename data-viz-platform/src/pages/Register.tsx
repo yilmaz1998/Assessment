@@ -24,9 +24,10 @@ export default function Register() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <h1 className="text-5xl">Register</h1>
-      <form onSubmit={handleRegister} className="flex flex-col w-80 max-w-full">
+    <div className="h-screen flex flex-col justify-center text-center items-center">
+       <div className="bg-white w-full max-w-md bg-white shadow-lg rounded-xl p-12">
+       <h3 className="text-5xl">Register Page</h3>
+      <form onSubmit={handleRegister} className="flex flex-col max-w-full">
       <div className="form-floating mt-3 mb-3">
         <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Username"/>
         <label>Email</label>
@@ -48,5 +49,6 @@ export default function Register() {
         <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
       </div>
     </div>
+   </div>
   );
 };

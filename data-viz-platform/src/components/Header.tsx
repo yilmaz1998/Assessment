@@ -47,7 +47,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-100 px-3 py-3 flex justify-between items-center">
+    <header className="bg-gray-300 px-3 py-3 flex justify-between items-center">
       <h1 className="text-xl font-semibold text-gray-800">Data Viz Platform</h1>
       <div className="flex items-center gap-4">
         <button onClick={toggleSideBar} className='btn btn-primary w-32'>Edit Variables</button>
@@ -59,7 +59,7 @@ const Header = () => {
         </button>
       </div>
       <div
-        className={`fixed top-0 right-0 h-full w-58 lg:w-128 bg-gray-700 text-white transform transition-transform duration-800 ease-in-out z-10
+        className={`fixed top-0 right-0 h-full w-58 lg:w-128 bg-gray-600 text-white transform transition-transform duration-800 ease-in-out z-10
           ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-4 border-b flex justify-between items-center">

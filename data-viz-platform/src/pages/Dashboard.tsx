@@ -67,6 +67,7 @@ export default function Dashboard() {
           ...(showInterestRate ? [{ data: interestRateValues, label: 'Interest Rate (%)', color: 'purple' }] : []),
         ]}
         grid={{ vertical: true, horizontal: true }}
+        className='bg-white shadow-md rounded-md p-2'
       />
             </div>
     <div className="w-1/2 min-w-[800px]">
@@ -82,6 +83,7 @@ export default function Dashboard() {
           ...(showInterestRate ? [{ data: interestRateValues, label: 'Interest Rate (%)', color: 'purple' }] : []),
         ]}
         grid={{ vertical: true, horizontal: true }}
+        className='bg-white shadow-md rounded-md p-2'
       />
       </div>
     </div>
